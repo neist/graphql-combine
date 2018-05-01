@@ -47,7 +47,7 @@ const schema = makeExecutableSchema({ typeDefs, resolvers })
 
 # Show me more
 
-## Files
+### Files
 File: _graphql/author/schema.graphql_
 ```graphql
 type Author {
@@ -93,7 +93,7 @@ export default {
 }
 ```
 
-## Combine
+### Combine
 File: _index.js_
 ```js
 import combine from 'graphql-combine'
@@ -202,7 +202,7 @@ export default `
 
 # API
 
-## `combine(options)`
+### `combine(options)`
 
 The `combine()` function is a top-level function exported by the `graphql-combine` module.
 
