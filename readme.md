@@ -25,7 +25,7 @@ Combine everything
 
 File: _index.js_
 ```js
-// Depenedencies
+// Dependencies
 import { makeExecutableSchema } from 'graphql-tools'
 import combine from 'graphql-combine'
 import path from 'path'
