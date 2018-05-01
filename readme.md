@@ -22,16 +22,25 @@ index.js
 ```
 
 Combine everything
+
+File: _index.js_
 ```js
-// index.js
+// Depenedencies
+import { makeExecutableSchema } from 'graphql-tools'
 import combine from 'graphql-combine'
 import path from 'path'
 
-// Get combined GraphQL schema and resolvers object
+// Get combined typeDefs and resolvers object
 const { typeDefs, resolvers } = combine({
-  typeDefs: path.join(__dirname, 'graphql/**/schema.graphql'),
-  resolvers: path.join(__dirname, 'graphql/**/resolver.js')
+  // TypeDefs glob pattern
+  typeDefs: path.join(__dirname, 'graphql/*/schema.graphql'),
+
+  // Resolvers glob pattern
+  resolvers: path.join(__dirname, 'graphql/*/resolver.js')
 })
+
+// Build schema
+const schema = makeExecutableSchema({ typeDefs, resolvers })
 ```
 
 **That's it 👍🏼**
@@ -39,7 +48,7 @@ const { typeDefs, resolvers } = combine({
 # Show me more
 
 ## Files
-_graphql/author/schema.graphql_
+File: _graphql/author/schema.graphql_
 ```graphql
 type Author {
   id: Int!
@@ -52,7 +61,7 @@ type Query {
   author(id: Int!): Author
 }
 ```
-_graphql/author/resolver.js_
+File: _graphql/author/resolver.js_
 ```js
 export default {
   Query: {
@@ -62,7 +71,7 @@ export default {
   }
 }
 ```
-_graphql/book/schema.graphql_
+File: _graphql/book/schema.graphql_
 ```graphql
 type Book {
   title: String
@@ -73,7 +82,7 @@ type Query {
   book(id: Int!): Book
 }
 ```
-_graphql/book/resolver.js_
+File: _graphql/book/resolver.js_
 ```js
 export default {
   Query: {
@@ -85,14 +94,18 @@ export default {
 ```
 
 ## Combine
+File: _index.js_
 ```js
-// index.js
 import combine from 'graphql-combine'
 import path from 'path'
 
+// Get combined typeDefs and resolvers object
 const { typeDefs, resolvers } = combine({
-  typeDefs: path.join(__dirname, 'graphql/**/schema.graphql'),
-  resolvers: path.join(__dirname, 'graphql/**/resolver.js')
+  // TypeDefs glob pattern
+  typeDefs: path.join(__dirname, 'graphql/*/schema.graphql'),
+
+  // Resolvers glob pattern
+  resolvers: path.join(__dirname, 'graphql/*/resolver.js')
 })
 
 console.log(typeDefs)
@@ -146,10 +159,13 @@ import path from 'path'
 // Initialize the app
 const app = express();
 
-// Get combined GraphQL schema and resolvers object
+// Get combined typeDefs and resolvers object
 const { typeDefs, resolvers } = combine({
-  typeDefs: path.join(__dirname, 'graphql/**/schema.graphql'),
-  resolvers: path.join(__dirname, 'graphql/**/resolver.js')
+  // TypeDefs glob pattern
+  typeDefs: path.join(__dirname, 'graphql/*/schema.graphql'),
+
+  // Resolvers glob pattern
+  resolvers: path.join(__dirname, 'graphql/*/resolver.js')
 })
 
 // Put together a schema
@@ -167,3 +183,29 @@ app.listen(3000, () => {
 })
 ```
 
+# Did you know
+You can also define schemas in .js files:
+
+File: _graphql/book/schema.js_
+```js
+export default `
+  type Book {
+    title: String
+    author: Author
+  }
+
+  type Query {
+    book(id: Int!): Book
+  }
+`
+```
+
+# API
+
+## `combine(options)`
+
+The `combine()` function is a top-level function exported by the `graphql-combine` module.
+
+* `options`
+  * `typeDefs` The glob pattern for all schema files
+  * `resolvers` The glob pattern for all resolver files
