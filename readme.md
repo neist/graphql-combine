@@ -39,7 +39,7 @@ const { typeDefs, resolvers } = combine({
   resolvers: path.join(__dirname, 'graphql/*/resolver.js')
 })
 
-// Build schema
+// Put together a schema
 const schema = makeExecutableSchema({ typeDefs, resolvers })
 ```
 
