@@ -3,9 +3,19 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "graphql",
+    "schema",
+    "merge",
+    "combine",
+    "appolo",
+    "graphql-tools"
+  ],
+  "author": "Kasper Neist <kasper@neist.com>",
+  "license": "MIT",
+  "bugs": "https://github.com/neist/graphql-combine/issues",
+  "repository": "neist/graphql-combine",
+  "homepage": "https://github.com/neist/graphql-combine/",
   "dependencies": {
     "glob": "^7.1.2",
     "lodash.merge": "^4.6.1"
