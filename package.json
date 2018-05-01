@@ -1,7 +1,7 @@
 {
   "name": "graphql-combine",
   "version": "1.0.0",
-  "description": "",
+  "description": "Split your GraphQL schemas and resolver objects into different files and combine them with this tool.",
   "main": "index.js",
   "keywords": [
     "graphql",
