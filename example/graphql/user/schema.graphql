@@ -1,0 +1,20 @@
+"""
+A user.
+"""
+type User {
+  "User ID"
+  id: Int!
+
+  "First name"
+  firstName: String
+
+  "Last name"
+  lastName: String
+}
+ 
+type Query {
+  """
+  Get list of all users.
+  """
+  allUsers: [User]
+}
