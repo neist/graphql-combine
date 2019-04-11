@@ -1,6 +1,6 @@
 {
   "name": "graphql-combine",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A better way to modularize your GraphQL schemas and resolver objects.",
   "main": "index.js",
   "keywords": [
