@@ -1,5 +1,4 @@
 {
-  "name": "graphql-combine-example",
   "scripts": {
     "start": "node -r esm index.js"
   },

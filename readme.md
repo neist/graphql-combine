@@ -4,12 +4,12 @@ Split your GraphQL schemas and resolver objects into different files and combine
 
 # Getting started
 
-Install it
+## Install it
 ```bash
-$ npm install graphql-combine --save
+$ npm install graphql-combine
 ```
 
-Folder structure
+## Folder structure
 ```
 graphql/
   |-- author/
@@ -21,33 +21,7 @@ graphql/
 index.js
 ```
 
-Combine everything
-
-File: _index.js_
-```js
-// Dependencies
-import { makeExecutableSchema } from 'graphql-tools'
-import combine from 'graphql-combine'
-import path from 'path'
-
-// Get combined typeDefs and resolvers object
-const { typeDefs, resolvers } = combine({
-  // TypeDefs glob pattern
-  typeDefs: path.join(__dirname, 'graphql/*/schema.graphql'),
-
-  // Resolvers glob pattern
-  resolvers: path.join(__dirname, 'graphql/*/resolver.js')
-})
-
-// Put together a schema
-const schema = makeExecutableSchema({ typeDefs, resolvers })
-```
-
-**That's it 👍🏼**
-
-# Show me more
-
-### Files
+## Files
 File: _graphql/author/schema.graphql_
 ```graphql
 type Author {
@@ -93,112 +67,38 @@ export default {
 }
 ```
 
-### Combine
+## Start the server
+
 File: _index.js_
 ```js
-import combine from 'graphql-combine'
-import path from 'path'
-
-// Get combined typeDefs and resolvers object
-const { typeDefs, resolvers } = combine({
-  // TypeDefs glob pattern
-  typeDefs: path.join(__dirname, 'graphql/*/schema.graphql'),
-
-  // Resolvers glob pattern
-  resolvers: path.join(__dirname, 'graphql/*/resolver.js')
-})
-
-console.log(typeDefs)
-/*
-type Author {
-  id: Int!
-  firstName: String
-  lastName: String
-  books: [Book]
-}
-
-type Query {
-  author(id: Int!): Post
-}
-
-type Book {
-  title: String
-  author: Author
-}
-
-extend type Query {
-  book(id: Int!): Post
-}
-*/
-
-console.log(resolvers)
-/*
-{
-  Query: {
-    author: () => {
-      //...
-    },
-    book: () => {
-      //...
-    }
-  }
-}
-*/
-```
-
-# Usage with express and Apollo server
-```js
 // Dependencies
-import express from 'express'
-import bodyParser from 'body-parser'
-import { graphqlExpress, graphiqlExpress } from 'apollo-server-express'
-import { makeExecutableSchema } from 'graphql-tools'
+import { ApolloServer } from 'apollo-server'
 import combine from 'graphql-combine'
 import path from 'path'
 
-// Initialize the app
-const app = express();
-
-// Get combined typeDefs and resolvers object
+// Get combined typeDefs and resolvers
 const { typeDefs, resolvers } = combine({
   // TypeDefs glob pattern
   typeDefs: path.join(__dirname, 'graphql/*/schema.graphql'),
-
+ 
   // Resolvers glob pattern
   resolvers: path.join(__dirname, 'graphql/*/resolver.js')
 })
 
-// Put together a schema
-const schema = makeExecutableSchema({ typeDefs, resolvers })
-
-// The GraphQL endpoint
-app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }))
-
-// GraphiQL, a visual editor for queries
-app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }))
+// Initialize server
+const server = new ApolloServer({ typeDefs, resolvers })
 
 // Start the server
-app.listen(3000, () => {
-  console.log('Go to http://localhost:3000/graphiql to run queries!')
+server.listen().then(({ url }) => {
+  console.log(`🚀 Server ready at ${url}`)
 })
 ```
 
-# Did you know
-You can also define schemas in .js files:
+## **That's it 👍🏼**
 
-File: _graphql/book/schema.js_
-```js
-export default `
-  type Book {
-    title: String
-    author: Author
-  }
+# Example
 
-  type Query {
-    book(id: Int!): Book
-  }
-`
-```
+Have a look at this [simple example](https://github.com/neist/graphql-combine/tree/master/example) using `graphql-combine` and `apollo-server`.
 
 # API
 
