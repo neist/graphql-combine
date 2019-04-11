@@ -20,7 +20,7 @@ const getSchemaString = file => {
     const exported = require(file)
     str = String(exported.default || exported)
 
-  // Handle orther files
+  // Handle other files
   } else {
     str = fs.readFileSync(file, 'utf-8')
   }
