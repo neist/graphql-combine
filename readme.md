@@ -1,6 +1,6 @@
 [![NPM version](https://img.shields.io/npm/v/graphql-combine.svg)](https://www.npmjs.com/package/graphql-combine)
 
-Split your GraphQL schemas and resolver objects into different files and combine them with this tool.
+A better way to modularize your GraphQL schemas and resolver objects.
 
 # Getting started
 
@@ -94,7 +94,7 @@ server.listen().then(({ url }) => {
 })
 ```
 
-## **That's it 👍🏼**
+**That's it 👍🏼**
 
 # Example
 
