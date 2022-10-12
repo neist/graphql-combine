@@ -3,7 +3,7 @@
     "start": "node -r esm index.js"
   },
   "dependencies": {
-    "apollo-server": "^2.4.8",
+    "apollo-server": "^2.25.4",
     "esm": "^3.2.22",
     "graphql": "^14.2.1",
     "graphql-combine": "^1.0.0"
